@@ -1,4 +1,4 @@
-# Medevial Game
+# Medieval Game
 ## Serialization Project
 
 - Users will focus on creating the core of `MedievalGame.java`
@@ -13,7 +13,7 @@ I looked through lessons of beginner and intermediate java so far and incorporat
 - Review given files
 - Add to `Player.java` and discuss extra functionality (to play with post-project)
 - Add serialization to object files (`Armour.java` and children, `Weapon.java`, `Player.java`)
-- Focus on core `MedevialGame.java` with a focus on serialization and read/write to file
+- Focus on core `MedievalGame.java` with a focus on serialization and read/write to file
 
 ### TODO:
 
