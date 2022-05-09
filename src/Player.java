@@ -1,6 +1,8 @@
 import java.io.Serializable;
 
 public class Player implements Serializable {
+
+    /* Instance Variables */
     private static final long serialVersionUID = 1L;
 
     private final String name;
@@ -13,35 +15,14 @@ public class Player implements Serializable {
     private Trouser trouser;
     private Shoe shoe;
 
+    /* Constructors */
     public Player(String name) {
         this.name = name;
         this.currentWeapon = new Weapon("Rusty Short Sword", 3);
         this.health = 100;
     }
 
-
-    public String getName() {
-        return name;
-    }
-
-    public String getCurrentWeapon() {
-        return "Currently wielding: " +
-                currentWeapon.getName() +
-                ". This weapon does " +
-                currentWeapon.getDamage() +
-                " damage.\n";
-    }
-
-    public void setCurrentWeapon(Weapon currentWeapon) {
-        this.currentWeapon = currentWeapon;
-    }
-
-    public double getHealth() {
-        return health;
-    }
-    public int getDefenseRating() {
-        return helmet.getDefenseRating() + shirt.getDefenseRating() + trouser.getDefenseRating() + shoe.getDefenseRating();
-    }
+    /* Instance Methods */
     public void takeDamage(double enemyAttack) {
         double damage = enemyAttack - (getDefenseRating() / 5.0);
         this.health -= damage;
@@ -52,11 +33,37 @@ public class Player implements Serializable {
             System.out.println("Current Health: " + this.health);
         }
     }
+
     public void heal(double healthToAdd) {
         this.health += healthToAdd;
         if (this.health > 100) {
             this.health = 100;
         }
+    }
+
+    /* Getters & Setters */
+    public String getName() {
+        return name;
+    }
+
+    public String getCurrentWeapon() {
+        return "Currently wielding: " +
+            currentWeapon.getName() +
+            ". This weapon does " +
+            currentWeapon.getDamage() +
+            " damage.\n";
+    }
+
+    public void setCurrentWeapon(Weapon currentWeapon) {
+        this.currentWeapon = currentWeapon;
+    }
+
+    public double getHealth() {
+        return health;
+    }
+
+    public int getDefenseRating() {
+        return helmet.getDefenseRating() + shirt.getDefenseRating() + trouser.getDefenseRating() + shoe.getDefenseRating();
     }
 
     public Helmet getHelmet() {

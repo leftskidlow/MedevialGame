@@ -4,34 +4,51 @@ import java.util.Scanner;
 
 public class MedievalGame {
 
+    /* Instance Variables */
     private Player player;
 
     public static void main(String[] args) {
+
         Scanner console = new Scanner(System.in);
         MedievalGame game = new MedievalGame();
         game.player = game.start(console);
+
         game.addDelay(200);
+
         System.out.println("\nLet's take a quick look at you to make sure you're ready to head out the door.");
         System.out.println(game.player);
+
         game.addDelay(1000);
+
         System.out.println("\nWell, you're off to a good start, let's get your game saved so we don't lose it.");
         game.save();
+
         game.addDelay(1000);
+
         System.out.println("We just saved your game...");
         System.out.println("Now we are going to try to load your character to make sure the save worked...");
+
         game.addDelay(1000);
+
         System.out.println("Deleting character...");
         String charName = game.player.getName();
         game.player = null;
+
         game.addDelay(1000);
+
         game.player = game.load(charName, console);
         System.out.println("Loading character...");
+
         game.addDelay(1000);
+
         System.out.println("Now let's print out your character again to make sure everything loaded:\n");
+
         game.addDelay(500);
+
         System.out.println(game.player);
     }
 
+    /* Instance Methods */
     private Player start(Scanner console) {
         Art.homeScreen();
         System.out.println("Welcome to your latest adventure!");
@@ -65,9 +82,8 @@ public class MedievalGame {
     }
 
     private void save() {
-        FileOutputStream userSaveFile = null;
         try {
-            userSaveFile = new FileOutputStream(player.getName() + ".svr");
+            FileOutputStream userSaveFile = new FileOutputStream(player.getName() + ".svr");
             ObjectOutputStream userSaver = new ObjectOutputStream(userSaveFile);
             userSaver.writeObject(player);
         } catch (IOException e) {
@@ -85,9 +101,8 @@ public class MedievalGame {
 
     private Player load(String playerName, Scanner console){
         Player loadedPlayer;
-        FileInputStream userSaveFile = null;
         try {
-            userSaveFile = new FileInputStream(playerName + ".svr");
+            FileInputStream userSaveFile = new FileInputStream(playerName + ".svr");
             ObjectInputStream userLoader = new ObjectInputStream(userSaveFile);
             loadedPlayer = (Player) userLoader.readObject();
         } catch (IOException | ClassNotFoundException e) {
