@@ -1,6 +1,11 @@
 package finished;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -13,40 +18,34 @@ public class MedievalGame {
 
     Scanner console = new Scanner(System.in);
     MedievalGame game = new MedievalGame();
+
     game.player = game.start(console);
 
-    game.addDelay(200);
-
+    game.addDelay(500);
     System.out.println("\nLet's take a quick look at you to make sure you're ready to head out the door.");
     System.out.println(game.player);
 
     game.addDelay(1000);
-
     System.out.println("\nWell, you're off to a good start, let's get your game saved so we don't lose it.");
     game.save();
 
-    game.addDelay(1000);
-
+    game.addDelay(2000);
     System.out.println("We just saved your game...");
     System.out.println("Now we are going to try to load your character to make sure the save worked...");
 
     game.addDelay(1000);
-
     System.out.println("Deleting character...");
     String charName = game.player.getName();
     game.player = null;
 
-    game.addDelay(1000);
-
+    game.addDelay(1500);
     game.player = game.load(charName, console);
     System.out.println("Loading character...");
 
-    game.addDelay(1000);
-
-    System.out.println("Now let's print out your character again to make sure everything loaded:\n");
+    game.addDelay(2000);
+    System.out.println("Now let's print out your character again to make sure everything loaded:");
 
     game.addDelay(500);
-
     System.out.println(game.player);
   }
 
@@ -59,7 +58,7 @@ public class MedievalGame {
     String answer = console.next().toLowerCase();
     Player player;
     while (true) {
-      addDelay(200);
+      addDelay(500);
       if (answer.equals("y")) {
         System.out.print("\nAhh... I knew I remembered you, what was your name again? Let me see if I can find your backpack: ");
         player = load(console.next(), console);
@@ -84,10 +83,11 @@ public class MedievalGame {
   }
 
   private void save() {
+    String fileName = player.getName() + ".svr";
     try {
-      FileOutputStream userSaveFile = new FileOutputStream(player.getName() + ".svr");
-      ObjectOutputStream userSaver = new ObjectOutputStream(userSaveFile);
-      userSaver.writeObject(player);
+      FileOutputStream userSaveFile = new FileOutputStream(fileName);
+      ObjectOutputStream playerSaver = new ObjectOutputStream(userSaveFile);
+      playerSaver.writeObject(player);
     } catch (IOException e) {
       System.out.println("There was an error saving your game, your file might not be available the next time you go to load a game.");
     }
@@ -97,11 +97,14 @@ public class MedievalGame {
     Player loadedPlayer;
     try {
       FileInputStream userSaveFile = new FileInputStream(playerName + ".svr");
-      ObjectInputStream userLoader = new ObjectInputStream(userSaveFile);
-      loadedPlayer = (Player) userLoader.readObject();
+      ObjectInputStream playerLoader = new ObjectInputStream(userSaveFile);
+      loadedPlayer = (Player) playerLoader.readObject();
     } catch (IOException | ClassNotFoundException e) {
-      System.out.println("There was a problem loading your character, we've created a new player with the name you entered.");
+      addDelay(1500);
+      System.out.println("\nThere was a problem loading your character, we've created a new player with the name you entered.");
       System.out.println("If you're sure the spelling is correct, your character file may no longer exist, please reload the game if you'd like to try again.");
+      System.out.println("In the mean time, we'll create you a new character with the name: " + playerName);
+      addDelay(2000);
       loadedPlayer = new Player(playerName);
     }
     return loadedPlayer;

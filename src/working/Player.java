@@ -106,13 +106,13 @@ public class Player implements Serializable {
 
   @Override
   public String toString() {
-    return "\nCurrent finished.Player: \n" +
+    return "\nCurrent Player: \n" +
         "Name: " + name + "\n" +
         "Health: " + getHealth() + "\n" +
         getCurrentWeapon() +
-        "Equipped finished.Armour: " + "\n" +
-        "   finished.Helmet: " + helmet +
-        "   finished.Shirt: " + shirt +
+        "Equipped Armour: " + "\n" +
+        "   Helmet: " + helmet +
+        "   Shirt: " + shirt +
         "   Trousers: " + trouser +
         "   Shoes: " + shoe;
   }
